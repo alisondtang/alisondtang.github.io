@@ -9,10 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-
+    <nav class="scroll-nav">
+        <a href="#about" class="scroll-link">ABOUT</a>
+        <a href="#cv" class="scroll-link">CV</a>
+        <a href="#contact" class="scroll-link">CONTACT</a>
+    </nav>
 
     <!-- intro Section -->
-    <section class="about-section">
+    <section id="intro" class="about-section">
         <div class="container about-grid">
             <div class="about-image-container">
                 <img src="resources/pic1.jpg" alt="adtang" class="profile-img">
@@ -27,7 +31,7 @@
 
 
     <!-- About Section -->
-    <section class="about-section">
+    <section id="about" class="about-section">
         <div class="container about-grid">
             <div class="about-text">
                 <!-- <h1 class="display-serif">ABOUT ME</h1> -->
@@ -44,7 +48,7 @@
     </section>
 
     <!-- CV Section -->
-    <section class="cv-section">
+    <section id="cv" class="cv-section">
         <div class="container">
             <!-- <h1 class="cv-title display-serif">CV</h1> -->
             <h1 class="cv-title display-serif reveal">CV</h1>
@@ -70,7 +74,7 @@
                         <p class="location"><span>&rsaquo;</span> University of California, Santa Cruz</p>
                     </div>
                     <div class="cv-item">
-                        <h3>BA in Molecular and Cell Biology</h3>
+                        <h3>B.A. in Molecular and Cell Biology</h3>
                         <p class="location"><span>&rsaquo;</span> University of California, Berkeley</p>
                     </div>
                 </div>
@@ -103,15 +107,15 @@
     </section>
 
 <!-- Contact Section -->
-<section class="contact-section">
+<section id="contact" class="contact-section">
     <div class="container reveal">
         <h2 class="display-serif">Bonus links</h2>
         <p>Thank you for visiting my site!</p>
         
         <div class="button-group">
             <a href="https://scholar.google.com/citations?user=ZvKzXmgAAAAJ&hl=en" class="contact-btn">Publications</a>
-            <a href="resources/CV_ATang_2026May.pdf" class="contact-btn">Full CV</a>
-            <a href="https://www.linkedin.com/in/alisontang/" class="contact-btn secondary">LinkedIn</a>
+            <a href="resources/CV_ATang_May2026.pdf" class="contact-btn">Full CV</a>
+            <a href="https://www.linkedin.com/in/alisontang/" class="contact-btn">LinkedIn</a>
 
         </div>
     </div>
@@ -130,9 +134,43 @@
         threshold: 0.1 
     });
 
-    // Select all elements with the .reveal class
-    const hiddenElements = document.querySelectorAll('.reveal');
-    hiddenElements.forEach((el) => observer.observe(el));
+
+    // 1. Reveal Animation Logic (Fade-in on scroll)
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+    // 2. Highlighting Logic (Scroll-Spy)
+    const navLinks = document.querySelectorAll('.scroll-link');
+    const sections = document.querySelectorAll('section');
+
+    window.addEventListener('scroll', () => {
+        let currentId = "";
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            // Check if the scroll position is within the section (with a 150px offset)
+            if (pageYOffset >= (sectionTop - 150)) {
+                currentId = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active-nav');
+            // Check if the link's href matches the current section's ID
+            if (link.getAttribute('href') === `#${currentId}`) {
+                link.classList.add('active-nav');
+            }
+        });
+    });
+
 </script>
 
 </body>
