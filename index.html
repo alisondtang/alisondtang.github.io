@@ -57,26 +57,56 @@
                 <!-- Work Experience -->
                 <div class="cv-column">
                     <h2 class="column-header display-serif">WORK</h2>
-                    <div class="cv-item">
+
+                        <div class="cv-item">
+                            <!-- Clickable Header -->
+                            <div class="cv-header" onclick="toggleCV(this)">
+                                <h3>Senior Computational Biologist</h3>
+                                <p class="location"><span class="caret">&rsaquo;</span>Freenome</p>
+                            </div>
+                            <!-- Hidden Content -->
+                            <div class="cv-details">
+                                <p>Freenome has developed blood tests for noninvasive profiling of patient tumor/immune biology and drug response; if you have an interest in Freenome's technologies and access to patient samples for those who could benefit, please message me on LinkedIn.</p>
+                            </div>
+                        </div>
+
+<!--                     <div class="cv-item">
                         <h3>Senior Computational Biologist</h3>
                         <p class="location"><span>&rsaquo;</span> Freenome</p>
                             <div>
                             <p style="margin-left: 50px;">Freenome has developed blood tests for noninvasive profiling of patient tumor/immune biology and drug response; if you have an interest in Freenome's technologies and access to patient samples for those who could benefit, please message me on LinkedIn.</p>
                             </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Education -->
                 <div class="cv-column">
                     <h2 class="column-header display-serif">EDUCATION</h2>
-                    <div class="cv-item">
-                        <h3>Ph.D. Biomolecular Engineering and Bioinformatics</h3>
-                        <p class="location"><span>&rsaquo;</span> University of California, Santa Cruz</p>
-                    </div>
-                    <div class="cv-item">
-                        <h3>B.A. in Molecular and Cell Biology</h3>
-                        <p class="location"><span>&rsaquo;</span> University of California, Berkeley</p>
-                    </div>
+
+                        <div class="cv-item">
+                            <!-- Clickable Header -->
+                            <div class="cv-header" onclick="toggleCV(this)">
+                                <h3>Ph.D. Biomolecular Engineering and Bioinformatics</h3>
+                                <p class="location"><span class="caret">&rsaquo;</span>University of California, Santa Cruz</p>
+                            </div>
+                            <!-- Hidden Content -->
+                            <div class="cv-details">
+                                <p>My advisor was <a href="https://brookslab.ucsc.edu" class="dark-link">Dr. Angela Brooks</a>.</p>
+                            </div>
+                        </div>
+
+                        <div class="cv-item">
+                            <!-- Clickable Header -->
+                            <div class="cv-header" onclick="toggleCV(this)">
+                                <h3>B.A. in Molecular and Cell Biology</h3>
+                                <p class="location"><span class="caret">&rsaquo;</span>University of California, Berkeley</p>
+                            </div>
+                            <!-- Hidden Content -->
+                            <div class="cv-details">
+                                <p>Concentration in Genetics, Genomics, and Development. I also took courses foundational for bioinformatics, such as relevant statistics/ bioengineering courses as well as all the lower division CS courses required for the CS major.</p>
+                            </div>
+                        </div>
+
                 </div>
             </div>
         </div>
@@ -91,9 +121,10 @@
                 <h1 class="display-serif reveal">AWARDS</h1>
 
                 <ul>
-                  <li>Ruth L. Kirschstein Predoctoral Individual National Research Service Award: Platform for transcriptome-wide RNA modification identification in long reads</li>
+                  <li>F-31 Ruth L. Kirschstein Predoctoral Individual National Research Service Award: Platform for transcriptome-wide RNA modification identification in long reads</li>
                   <li>T-32 Genome Sciences NIH Training Grant</li>
                   <li>Darrell Long and Elaine Long Prize in Experimental Engineering for Ph.D. Dissertations</li>
+                  <li>Going the Extra Mile Award (Freenome Internal Award)</li>
                 </ul>
                 <p></p>
                 <p>This site last updated May 2026.</p>
@@ -105,6 +136,8 @@
             </div>
         </div>
     </section>
+
+<!-- pregeminiupdate -->
 
 <!-- Contact Section -->
 <section id="contact" class="contact-section">
@@ -170,6 +203,32 @@
             }
         });
     });
+    // Show/Hide Nav on Scroll
+    const nav = document.querySelector('.scroll-nav');
+
+    window.addEventListener('scroll', () => {
+        // If user has scrolled more than 100px from the top
+        if (window.scrollY > 100) {
+            nav.classList.add('visible');
+        } else {
+            nav.classList.remove('visible');
+        }
+    });
+
+function toggleCV(element) {
+    // Get the parent cv-item
+    const parent = element.parentElement;
+    
+    // Toggle the active class
+    parent.classList.toggle('active');
+    
+    // Optional: Close other open items (Accordion style)
+    /*
+    document.querySelectorAll('.cv-item').forEach(item => {
+        if (item !== parent) item.classList.remove('active');
+    });
+    */
+}
 
 </script>
 

@@ -257,6 +257,7 @@ a:visited {
 /* Mouse over link */
 a:hover {
   color: var(--cream);
+  transition: color 0.3s ease;
 }
 
 /* Selected/Clicked link */
@@ -264,26 +265,59 @@ a:active {
   color: var(--white);
 }
 
+.dark-link:link {
+  color: var(--text-dark);
+}
+
+.dark-link:visited {
+  color: var(--text-dark);
+}
+
+.dark-link:active {
+  color: var(--text-dark);
+}
+
+.dark-link:hover {
+  color: var(--terracotta);
+    transition: color 0.3s ease;
+}
+
+
 /* Smooth Scroll Behavior */
 html {
     scroll-behavior: smooth;
 }
 
-/* Floating Navigation */
+/* Floating Navigation - Initial Hidden State */
 .scroll-nav {
     position: fixed;
     top: 20px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -20px); /* Pushed up slightly */
     z-index: 2000;
     background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+
     backdrop-filter: blur(10px);
     padding: 10px 20px;
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     gap: 15px;
+    
+    /* Animation settings */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease-in-out;
 }
+
+/* State when scrolling down */
+.scroll-nav.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0); /* Slides into position */
+}
+
 
 .scroll-link {
     text-decoration: none;
@@ -311,4 +345,68 @@ section {
 .active-nav {
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Caret Styling & Rotation */
+.caret {
+    display: inline-block;
+    color: var(--terracotta);
+    font-weight: bold;
+    margin-right: 8px;
+    transition: transform 0.3s ease; /* Smooth rotation */
+    font-size: 1.2rem;
+}
+
+.cv-header {
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Rotate the caret when the parent has the 'active' class */
+.cv-item.active .caret {
+    transform: rotate(90deg);
+}
+
+/* Hidden Details Styling */
+.cv-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.3s ease;
+    padding-left: 20px;
+    opacity: 0;
+}
+
+/* Expanded State */
+.cv-item.active .cv-details {
+    max-height: 200px; /* Adjust based on your text length */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    opacity: 1;
+}
+
+/* Subtle Hover Effect */
+.cv-header:hover h3 {
+    color: var(--terracotta);
+    transition: color 0.3s ease;
+}
+
+/* Mobile Styles for Contact Section */
+@media (max-width: 600px) {
+    .button-group {
+        /* Change from horizontal to vertical */
+        flex-direction: column; 
+        
+        /* Ensure buttons stretch to the same width or center them */
+        align-items: center; 
+        
+        /* Add vertical space between the stacked buttons */
+        gap: 15px; 
+    }
+
+    .contact-btn {
+        /* Make buttons wider on mobile for easier tapping */
+        width: 100%; 
+        max-width: 300px;
+        text-align: center;
+    }
 }
