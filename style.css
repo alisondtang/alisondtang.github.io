@@ -424,3 +424,16 @@ section {
 .contact-section .home-link a {
     color: inherit;
 }
+
+/* 404 page: fill the screen and center the message */
+.not-found {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.not-found h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
